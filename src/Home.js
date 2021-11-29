@@ -8,7 +8,8 @@ class Home extends React.Component {
         <div>
             <p>Home</p>
             <ol>
-                {this.props.listOfRecipes.map((singleElement)=><li key={singleElement._id}><Link to={`/recipes/${singleElement._id}`}>{singleElement.title}</Link></li>)}
+                {this.props.listOfRecipes.map((singleElement)=>{
+                    return <li key={singleElement._id}><Link to={`/recipes/${singleElement._id}`}>{singleElement.title}</Link></li>})}
             </ol>
         </div>
         );
