@@ -5,8 +5,10 @@ import Home from './Home';
 import SingleRecipe from './SingleRecipe';
 
 class App extends React.Component {
+  
   constructor(){
     super();
+    
     this.state = {
       listOfRecipes: []
     }
@@ -25,8 +27,8 @@ class App extends React.Component {
           {/* Homepage with links to all recipies as well as an "Add recipe" button that will take you to the add recipe form page */}
           {/* individual recipe pages will have all applicable information displayed as well as an edit and delete button */}
           <Routes>
-            <Route path="/" element={<Home listOfRecipes={this.state.listOfRecipes}/>} />
-            <Route path="/recipes/:id" element={<SingleRecipe />} />
+            <Route exact path="/" element={<Home listOfRecipes={this.state.listOfRecipes}/>} />
+            <Route exact path="/recipes/:id" element={<SingleRecipe />} />
           </Routes>
       </Router>
     );
