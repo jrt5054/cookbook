@@ -20,6 +20,14 @@ class App extends React.Component {
     .then(data=>this.setState({listOfRecipes: data}))
   }
 
+  // removeRecipe() {
+
+  // }
+
+  addRecipe() {
+    
+  }
+
   render() { 
     return(
       <Router>
