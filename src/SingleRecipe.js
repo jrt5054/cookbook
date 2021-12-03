@@ -39,7 +39,7 @@ function SingleRecipe() {
             <img src={recipe.imageURL} alt="picture" width="500" />
             <p>Prep Time: {recipe.prepTime}</p>
             <p>Ingredients: {recipe.ingredients}</p>
-            <p>Background: {recipe.story}</p>
+            <p>Story: {recipe.story}</p>
             <p>Directions: {recipe.directions}</p>
         </div>
     );
