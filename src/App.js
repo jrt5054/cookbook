@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import SingleRecipe from './SingleRecipe';
+import NewRecipe from './NewRecipe';
 
 class App extends React.Component {
   
@@ -34,10 +35,13 @@ class App extends React.Component {
         <Header />
           {/* Homepage with links to all recipies as well as an "Add recipe" button that will take you to the add recipe form page */}
           {/* individual recipe pages will have all applicable information displayed as well as an edit and delete button */}
+          
           <Routes>
             <Route exact path="/" element={<Home listOfRecipes={this.state.listOfRecipes}/>} />
             <Route exact path="/recipes/:id" element={<SingleRecipe />} />
           </Routes>
+          <h2>Add Your Own Recipe!</h2>
+          <NewRecipe />
       </Router>
     );
   }
