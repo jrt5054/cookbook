@@ -9,10 +9,11 @@ class App extends React.Component {
   
   constructor(){
     super();
-    
     this.state = {
       listOfRecipes: []
     }
+    this.addRecipe = this.addRecipe.bind(this)
+    this.removeRecipe = this.removeRecipe.bind(this)
   }
 
   componentDidMount(){
@@ -21,7 +22,39 @@ class App extends React.Component {
     .then(data=>this.setState({listOfRecipes: data}))
   }
 
-  render() { 
+  removeRecipe(recipeId) {
+    // find recipe id in state array
+    // let allRecipes = this.state.listOfRecipes;
+    // let newArray = allRecipes.filter(element=>element._id !== recipeId);
+    // this.setState({listOfRecipes: newArray})
+    fetch(`http://localhost:5000/recipes/${recipeId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    let newArray = this.state.listOfRecipes;
+    let filteredArray = newArray.filter((element)=>{return element._id !== recipeId});
+    this.setState({listOfRecipes: filteredArray});
+  }
+  
+
+  addRecipe(recipeObj) {
+    fetch('http://localhost:5000/recipes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(recipeObj)
+    })
+    .then((response)=>response.json())
+    .then((data)=>{
+      console.log(data)
+      this.setState({listOfRecipes: [...this.state.listOfRecipes, data]})
+    })
+  }
+
+  render() {
     return(
       <Router>
         <Header />
@@ -29,11 +62,11 @@ class App extends React.Component {
           {/* individual recipe pages will have all applicable information displayed as well as an edit and delete button */}
           
           <Routes>
-            <Route exact path="/" element={<Home listOfRecipes={this.state.listOfRecipes}/>} />
+            <Route exact path="/" element={<Home listOfRecipes={this.state.listOfRecipes} removeRecipe={this.removeRecipe}/>} />
             <Route exact path="/recipes/:id" element={<SingleRecipe />} />
           </Routes>
           <h2>Add Your Own Recipe!</h2>
-          <NewRecipe />
+          <NewRecipe addRecipe={this.addRecipe}/>
       </Router>
     );
   }

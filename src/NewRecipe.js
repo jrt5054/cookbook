@@ -2,6 +2,11 @@ import React from 'react';
 
 class NewRecipe extends React.Component {
 
+  constructor(){
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this)
+}
+
   handleSubmit(event) {
     event.preventDefault();
     let newRecipeObject = {
@@ -11,8 +16,8 @@ class NewRecipe extends React.Component {
       ingredients: event.target.ingredients.value,
       story: event.target.story.value,
       directions: event.target.directions.value
-    }
-    // insert function to add object to database here
+    };
+    this.props.addRecipe(newRecipeObject);
   }
 
 
