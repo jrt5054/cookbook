@@ -9,10 +9,10 @@ class App extends React.Component {
   
   constructor(){
     super();
-    
     this.state = {
       listOfRecipes: []
     }
+    this.addRecipe = this.addRecipe.bind(this)
   }
 
   componentDidMount(){
@@ -23,13 +23,25 @@ class App extends React.Component {
 
   // removeRecipe() {
 
-  // }
+  //   }
+  
 
-  addRecipe() {
-    
+  addRecipe(recipeObj) {
+    fetch('http://localhost:5000/recipes/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(recipeObj)
+    })
+    .then((response)=>response.json())
+    .then((data)=>{
+      console.log(data)
+      this.setState({listOfRecipes: [...this.state.listOfRecipes, data]})
+    })
   }
 
-  render() { 
+  render() {
     return(
       <Router>
         <Header />
@@ -41,7 +53,7 @@ class App extends React.Component {
             <Route exact path="/recipes/:id" element={<SingleRecipe />} />
           </Routes>
           <h2>Add Your Own Recipe!</h2>
-          <NewRecipe />
+          <NewRecipe addRecipe={this.addRecipe}/>
       </Router>
     );
   }
