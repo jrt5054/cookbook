@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
 import SingleRecipe from "./SingleRecipe";
-import NewRecipe from "./NewRecipe";
 
 class App extends React.Component {
   constructor() {
